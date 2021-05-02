@@ -1,1 +1,47 @@
+import pandas as pd  
+import numpy as np 
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.linear_model import LassoCV
 
+
+
+dataset= pd.read_csv('/content/2510364_USA.csv')
+dataset.drop('PGTM', inplace=True, axis=1)
+dataset.dropna(inplace=True)
+dataset.isnull().sum()
+dataset.shape
+
+
+rain= dataset.loc[(dataset['PRCP'] > 0)]
+no_rain= dataset.loc[(dataset['PRCP'] == 0)]
+
+concat= [rain, no_rain]
+new_dataset = pd.concat(concat)
+dataset=new_dataset.sample(frac=1).reset_index(drop=True)
+dataset['PRCP'] = dataset['PRCP'].apply(np.int64)
+
+dataset.head(10)
+
+
+plt.figure(figsize=(9, 5.5))
+# define the mask to set the values in the upper triangle to True
+mask = np.triu(np.ones_like(dataset.corr(), dtype=np.bool))
+heatmap = sn.heatmap(dataset.corr(), mask=mask, vmin=0, vmax=1, annot=True, cmap='Blues')
+
+
+features= dataset[['TAVG', 'TMAX', 'TMIN', 'AWND', 'WDF2', 'WDF5','WSF2', 'WSF5']]
+labels= dataset[['PRCP']]
+
+reg = LassoCV()
+reg.fit(features, labels.values.ravel())
+print("Best alpha using built-in LassoCV: %f" % reg.alpha_)
+print("Best score using built-in LassoCV: %f" %reg.score(features,labels.values.ravel()))
+coef = pd.Series(reg.coef_, index = features.columns)
+
+print("Lasso picked " + str(sum(coef != 0)) + " variables and eliminated the other " +  str(sum(coef == 0)) + " variables")
+
+imp_coef = coef.sort_values()
+import matplotlib
+matplotlib.rcParams['figure.figsize'] = (7.5, 6.0)
+imp_coef.plot(kind = "bar")
