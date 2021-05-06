@@ -3,7 +3,7 @@
 Rainfall depends on various dependent parameters like humidity, wind speed, temperate, weather type etc., and a good forecast result cannot be obtained if it only depends on a single feature. In this research project we present a systematic approach to perform an analysis of different meteorological variables and assess their impact on the occurrence rainfall occurrence. 
 
 
-### Code
+### Scripts
 + `Code.ipynb`: is the program code of this methodology. All the code is written in Python programming language.
 
 
