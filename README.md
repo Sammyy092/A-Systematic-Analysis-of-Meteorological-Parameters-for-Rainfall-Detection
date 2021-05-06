@@ -14,4 +14,4 @@ Rainfall depends on various dependent parameters like humidity, wind speed, temp
 
 ### Datasets
 
-This sections contains the csv file of the datset `(2510364_USA)` used in our research as a case study.
++ This sections contains the csv file of the datset `(2510364_USA)` used in our research as a case study.
