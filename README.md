@@ -8,8 +8,8 @@ Rainfall depends on various dependent parameters like humidity, wind speed, temp
 
 
 ### Results
-+ `corr_matrix.png./`: is the correlation matrix of different meteorological parameters with respect to rainfall.
-+ `features_scores.png./`: is the feature importance score of each parameter in detecting.
++ `corr_matrix.png`: is the correlation matrix of different meteorological parameters with respect to rainfall.
++ `features_scores.png`: is the feature importance score of each parameter in detecting.
 
 
 ### Datasets
